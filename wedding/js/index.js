@@ -40,11 +40,14 @@ async function loadEntries() {
             
             let imgHTML = '';
             if (entry.image_url) {
-                imgHTML = `
-                    <div class="mt-6 flex justify-center">
-                        <img src="${entry.image_url}" alt="Kỷ niệm" class="polaroid max-h-64 object-cover w-4/5">
-                    </div>
-                `;
+                const urls = entry.image_url.split(','); // Tách các link ảnh
+                if (urls.length === 1) {
+                    imgHTML = `<div class="mt-6 flex justify-center"><img src="${urls[0]}" class="polaroid max-h-64 object-cover w-4/5"></div>`;
+                } else {
+                    // Nếu nhiều ảnh, dàn thành lưới 2 cột
+                    let gridHTML = urls.map(url => `<img src="${url}" class="polaroid h-32 w-full object-cover">`).join('');
+                    imgHTML = `<div class="mt-6 grid grid-cols-2 gap-4">${gridHTML}</div>`;
+                }
             }
 
             entryDiv.innerHTML = `
@@ -72,47 +75,99 @@ async function loadEntries() {
     }
 }
 
-// Xử lý gửi form lên API
+loadEntries();
 
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    // Đổi trạng thái nút bấm
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = "Đang Gửi...";
+    submitBtn.innerHTML = "Đang Khởi Động..."; 
     submitBtn.disabled = true;
-
-    const formData = new FormData();
-    formData.append("name", document.getElementById('gb-name').value);
-    formData.append("message", document.getElementById('gb-message').value);
-    
-    const imageFile = document.getElementById('gb-image').files[0];
-    if (imageFile) formData.append("image", imageFile);
-
     try {
-        const response = await fetch(API_URL, {
-            method: "POST",
-            body: formData
+        const imageFiles = document.getElementById('gb-image').files;
+        let uploadedUrls = [];
+
+        if (imageFiles.length > 0) {
+            for (let i = 0; i < imageFiles.length; i++) {
+                submitBtn.innerHTML = `Đang tải ảnh ${i + 1}/${imageFiles.length} lên...`;
+                
+                const imgData = new FormData();
+                imgData.append("image", imageFiles[i]);
+                
+                const uploadRes = await fetch("https://api.lenguyenkiencuong.id.vn/api/upload", {
+                    method: "POST",
+                    body: imgData
+                });
+                
+                const uploadResult = await uploadRes.json();
+                if (uploadResult.status === "success") {
+                    uploadedUrls.push(uploadResult.url);
+                }
+            }
+        }
+
+        submitBtn.innerHTML = "Đang đóng gói yêu thương...";
+        const finalData = new FormData();
+        finalData.append("name", document.getElementById('gb-name').value);
+        finalData.append("message", document.getElementById('gb-message').value);
+        
+        if (uploadedUrls.length > 0) {
+            finalData.append("image_urls", uploadedUrls.join(','));
+        }
+        const response = await fetch("https://api.lenguyenkiencuong.id.vn/api/guestbook", { 
+            method: "POST", 
+            body: finalData 
         });
         
         const result = await response.json();
-        
+
         if (result.status === "success") {
-            alert("Lời chúc đã được gửi đi! Cường & Thảo xin cảm ơn bạn nhé ❤️");
+            Swal.fire({
+                title: 'Cảm ơn bạn!',
+                text: 'Lời chúc đã được gửi đi và đang chờ Cường & Thảo xem qua nhé ❤️',
+                icon: 'success',
+                confirmButtonColor: '#d4af37', 
+                confirmButtonText: 'Tuyệt vời',
+                customClass: {
+                    title: 'font-serif text-2xl',
+                    popup: 'rounded-2xl'
+                }
+            });
+            
             form.reset();
+            const labelSpan = document.getElementById('gb-image').parentElement.querySelector('span');
+            labelSpan.innerText = 'Đính kèm ảnh';
+            labelSpan.parentElement.classList.remove('text-wedding-dark', 'font-semibold');
         } else {
-            alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+            throw new Error("Lỗi từ máy chủ");
         }
     } catch (error) {
-        console.error("Lỗi khi gửi:", error);
-        alert("Không thể kết nối đến máy chủ. Bạn thử lại nha!");
+        console.error("Lỗi:", error);
+        Swal.fire({
+            title: 'Ôi hỏng!',
+            text: 'Mạng có vẻ yếu hoặc máy chủ đang bận. Bạn thử lại nha!',
+            icon: 'error',
+            confirmButtonColor: '#2c2c2c',
+            confirmButtonText: 'Đóng'
+        });
     } finally {
-        submitBtn.innerHTML = originalBtnText;
+        submitBtn.innerHTML = "Gửi Yêu Thương";
         submitBtn.disabled = false;
     }
 });
 
-loadEntries();
+
+const imageInput = document.getElementById('gb-image');
+imageInput.addEventListener('change', function(e) {
+    const files = e.target.files;
+    const labelSpan = imageInput.parentElement.querySelector('span'); 
+    
+    if (files.length > 0) {
+        labelSpan.innerText = `Đã chọn ${files.length} ảnh`; // Báo số lượng ảnh
+        labelSpan.parentElement.classList.add('text-wedding-dark', 'font-semibold');
+    } else {
+        labelSpan.innerText = 'Đính kèm ảnh';
+        labelSpan.parentElement.classList.remove('text-wedding-dark', 'font-semibold');
+    }
+});
 
 var loveSwiper = new Swiper(".loveSwiper", {
     slidesPerView: "auto",
