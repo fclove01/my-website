@@ -15,7 +15,7 @@ const countdownTimer = setInterval(() => {
     document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
 }, 1000);
 
-const API_URL = "http://160.25.168.183:8000/api/guestbook"; 
+const API_URL = "https://api.lenguyenkiencuong.id.vn/api/guestbook"; 
 const form = document.getElementById('guestbook-form');
 const entriesContainer = document.getElementById('guestbook-entries');
 const submitBtn = form.querySelector('button[type="submit"]');
@@ -61,7 +61,6 @@ async function loadEntries() {
             entriesContainer.appendChild(entryDiv);
         });
 
-        // Hiển thị nút "Mở Toàn Bộ Sổ Lưu Bút" nếu có nhiều hơn 6 lời chúc
         const viewAllBtn = document.getElementById('view-all-guestbook');
         if (allEntries.length > 6) {
             viewAllBtn.classList.remove('hidden');
@@ -99,7 +98,7 @@ form.addEventListener('submit', async function(e) {
         const result = await response.json();
         
         if (result.status === "success") {
-            alert("Cảm ơn bạn! Lời chúc đã được gửi đi và đang chờ Cường & Thảo xem qua nhé ❤️");
+            alert("Lời chúc đã được gửi đi! Cường & Thảo xin cảm ơn bạn nhé ❤️");
             form.reset();
         } else {
             alert("Có lỗi xảy ra, vui lòng thử lại sau.");
@@ -108,42 +107,35 @@ form.addEventListener('submit', async function(e) {
         console.error("Lỗi khi gửi:", error);
         alert("Không thể kết nối đến máy chủ. Bạn thử lại nha!");
     } finally {
-        // Khôi phục nút bấm
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
     }
 });
 
-// Tải dữ liệu lần đầu khi mở trang
 loadEntries();
 
-function autoSlide(sliderId) {
-const slider = document.getElementById(sliderId);
-if (!slider) return;
+var loveSwiper = new Swiper(".loveSwiper", {
+    slidesPerView: "auto",
+    spaceBetween: 20,
+    freeMode: true,
+    autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+    },
+});
+var weddingSwiper = new Swiper(".weddingSwiper", {
+    slidesPerView: "auto",
+    spaceBetween: 20,
+    freeMode: true,
+    autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+    },
+});
 
-let scrollAmount = 0;
-const speed = 2; // Tốc độ trượt
-const step = 336; // Chiều rộng ảnh (320px) + gap (16px)
-
-setInterval(() => {
-    slider.style.transition = "transform 0.5s ease-in-out";
-    scrollAmount += step;
-    
-    // Nếu cuộn hết thì quay lại đầu
-    if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
-        setTimeout(() => {
-            slider.style.transition = "none";
-            scrollAmount = 0;
-            slider.style.transform = `translateX(0px)`;
-        }, 500); // Đợi animation xong rồi reset
-    } else {
-        slider.style.transform = `translateX(-${scrollAmount}px)`;
-    }
-}, 3000); // 3 giây trượt 1 lần
-}
-
-// Kích hoạt cho các mục
-autoSlide('slider-anhcuoi');
-autoSlide('slider-lehoi');
-
-// Thay thế đoạn tạo entryDiv cũ bằng đoạn này:
+const lightbox = GLightbox({
+    touchNavigation: true,
+    loop: true,
+    openEffect: 'zoom',
+    closeEffect: 'fade'
+});

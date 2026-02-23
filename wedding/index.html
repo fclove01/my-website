@@ -21,6 +21,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
 
 </head>
 <body class="font-sans antialiased">
@@ -75,7 +79,9 @@
         </div>
     </section>
 
+    
     <section class="py-20 bg-white px-6 overflow-hidden">
+        
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="font-serif text-4xl mb-4">Album Kỷ Niệm</h2>
@@ -83,26 +89,71 @@
             </div>
 
             <div class="mb-12">
-                <h3 class="font-serif text-2xl mb-4 text-wedding-accent"># Yêu nhau</h3>
+                <h3 class="font-serif text-2xl mb-4 text-wedding-accent"># yêu nhau</h3>
                 <div class="relative w-full overflow-hidden">
-                    <div id="slider-anhcuoi" class="flex gap-4 transition-transform duration-700 ease-in-out">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                    <div class="swiper loveSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide w-80">
+                                <a href="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/2%20l.jpg" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/2%20l.jpg" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG_20250323_164620.jpg" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG_20250323_164620.jpg" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG20250309104236.jpg" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG20250309104236.jpg" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG20260218145644.jpg" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG20260218145644.jpg" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG_2391.JPG" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/IMG_2391.JPG" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="mb-12">
-                <h3 class="font-serif text-2xl mb-4 text-wedding-accent"># Và Cưới Nhau</h3>
+                <h3 class="font-serif text-2xl mb-4 text-wedding-accent"># và cưới nhau</h3>
                 <div class="relative w-full overflow-hidden">
-                    <div id="slider-lehoi" class="flex gap-4 transition-transform duration-700 ease-in-out">
-                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                    <div class="swiper weddingSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide w-80">
+                                <a href="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://images.unsplash.com/photo-1494955870715-979ca4f13bf0?w=500" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://images.unsplash.com/photo-1494955870715-979ca4f13bf0?w=500" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=500" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=500" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                            <div class="swiper-slide w-80">
+                                <a href="https://images.unsplash.com/photo-1520245880277-df9d97d1f240?w=500" class="glightbox" data-gallery="slider-1">
+                                    <img src="https://images.unsplash.com/photo-1520245880277-df9d97d1f240?w=500" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -161,6 +212,6 @@
         <p class="font-serif text-xl mb-2">Cường & Thảo</p>
         <p class="text-sm text-gray-400">© 2026. Code with ❤️</p>
     </footer>
-    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
