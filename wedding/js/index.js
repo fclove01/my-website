@@ -77,7 +77,7 @@ async function loadEntries() {
 
 loadEntries();
 
-fform.addEventListener('submit', async function(e) {
+form.addEventListener('submit', async function(e) {
     e.preventDefault();
     submitBtn.innerHTML = "Đang xử lý ảnh tốc độ cao..."; 
     submitBtn.disabled = true;
