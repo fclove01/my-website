@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ Lưu Bút | Cường & Thảo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&family=Lavishly+Yours&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { wedding: { light: '#fdfbf7', dark: '#2c2c2c', accent: '#d4af37' } },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fcfbf8; color: #2c2c2c; }
+        .font-lavishly { font-family: 'Lavishly Yours', cursive; font-weight: 400; }
+        .paper-style {
+            background-color: #fcfbf8;
+            background-image: repeating-linear-gradient(transparent, transparent 37px, #e5e7eb 37px, #e5e7eb 38px);
+            box-shadow: 3px 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f0ece1;
+            position: relative;
+        }
+        .washi-tape {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+            width: 100px; height: 30px; background-color: rgba(220, 210, 180, 0.6);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); z-index: 10;
+        }
+        .polaroid {
+            background: white; padding: 10px 10px 35px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transform: rotate(-2deg);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-12 relative">
+            <a href="index.html" class="absolute left-0 top-2 text-gray-500 hover:text-wedding-dark transition flex items-center gap-2 text-sm uppercase tracking-widest">
+                <span>&larr;</span> Trở về
+            </a>
+            <div class="text-center">
+                <h1 class="font-serif text-4xl md:text-5xl mb-4">Sổ Lưu Bút</h1>
+                <div class="w-16 h-[1px] bg-wedding-dark mx-auto"></div>
+                <p class="text-gray-500 mt-4 font-light">Tất cả những lời chúc yêu thương dành cho hai vợ chồng.</p>
+            </div>
+        </div>
+
+        <div id="full-guestbook-entries" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full text-center text-gray-400 py-10" id="loader">Đang tải những dòng yêu thương...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://[ĐỊA_CHỈ_IP_VPS_CỦA_ANH]:8000/api/guestbook"; 
+        
+        async function loadAllEntries() {
+            try {
+                const response = await fetch(API_URL);
+                const entries = await response.json();
+                
+                const container = document.getElementById('full-guestbook-entries');
+                container.innerHTML = '';
+                
+                if (entries.length === 0) {
+                    container.innerHTML = '<p class="col-span-full text-center text-gray-400">Chưa có lời chúc nào.</p>';
+                    return;
+                }
+
+                entries.forEach((entry, index) => {
+                    const entryDiv = document.createElement('div');
+                    const rotation = index % 2 === 0 ? 'rotate-1' : '-rotate-1';
+                    
+                    entryDiv.className = `paper-style p-6 pt-8 rounded-sm ${rotation} hover:z-10 transition-transform duration-300`;
+                    
+                    let imgHTML = '';
+                    if (entry.image_url) {
+                        imgHTML = `
+                            <div class="mt-6 flex justify-center">
+                                <img src="${entry.image_url}" alt="Kỷ niệm" class="polaroid max-h-64 object-cover w-4/5">
+                            </div>
+                        `;
+                    }
+
+                    entryDiv.innerHTML = `
+                        <div class="washi-tape"></div>
+                        <p class="font-lavishly text-4xl text-gray-700 whitespace-pre-line leading-[38px] min-h-[64px]">
+                            "${entry.message}"
+                        </p>
+                        <h4 class="font-lavishly text-5xl font-bold text-wedding-dark mt-4 text-right">
+                            - ${entry.name} -
+                        </h4>
+                        ${imgHTML}
+                        <p class="text-xs text-gray-400 mt-6 text-right font-sans">${entry.date}</p>
+                    `;
+                    container.appendChild(entryDiv);
+                });
+            } catch (error) {
+                document.getElementById('loader').innerText = "Không thể tải dữ liệu. Vui lòng thử lại sau.";
+            }
+        }
+        
+        loadAllEntries();
+    </script>
+</body>
+</html>
