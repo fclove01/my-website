@@ -77,46 +77,53 @@ async function loadEntries() {
 
 loadEntries();
 
-form.addEventListener('submit', async function(e) {
+fform.addEventListener('submit', async function(e) {
     e.preventDefault();
-    submitBtn.innerHTML = "Đang Khởi Động..."; 
+    submitBtn.innerHTML = "Đang xử lý ảnh tốc độ cao..."; 
     submitBtn.disabled = true;
+
     try {
         const imageFiles = document.getElementById('gb-image').files;
         let uploadedUrls = [];
 
+        // BƯỚC 1: Nén ảnh và Upload Song Song (Promise.all)
         if (imageFiles.length > 0) {
-            for (let i = 0; i < imageFiles.length; i++) {
-                submitBtn.innerHTML = `Đang tải ảnh ${i + 1}/${imageFiles.length} lên...`;
-                
-                const imgData = new FormData();
-                imgData.append("image", imageFiles[i]);
-                
-                const uploadRes = await fetch("https://api.lenguyenkiencuong.id.vn/api/upload", {
-                    method: "POST",
-                    body: imgData
-                });
-                
-                const uploadResult = await uploadRes.json();
-                if (uploadResult.status === "success") {
-                    uploadedUrls.push(uploadResult.url);
+            const uploadPromises = Array.from(imageFiles).map(async (file) => {
+                try {
+                    const options = { maxSizeMB: 1, maxWidthOrHeight: 1920, useWebWorker: true };
+                    const compressedFile = await imageCompression(file, options);
+                    
+                    const imgData = new FormData();
+                    imgData.append("image", compressedFile, compressedFile.name.replace(/[^a-zA-Z0-9.]/g, "_"));
+                    
+                    const uploadRes = await fetch("https://api.lenguyenkiencuong.id.vn/api/upload", {
+                        method: "POST", body: imgData
+                    });
+                    
+                    const uploadResult = await uploadRes.json();
+                    if (uploadResult.status === "success") return uploadResult.url;
+                    return null;
+                } catch (err) {
+                    console.error("Lỗi nén/upload file:", err);
+                    return null;
                 }
-            }
+            });
+
+            const results = await Promise.all(uploadPromises);
+            uploadedUrls = results.filter(url => url !== null);
         }
 
+        // BƯỚC 2: Gói Tên + Lời chúc + Link ảnh gửi về Database
         submitBtn.innerHTML = "Đang đóng gói yêu thương...";
+        
         const finalData = new FormData();
         finalData.append("name", document.getElementById('gb-name').value);
         finalData.append("message", document.getElementById('gb-message').value);
-        
-        if (uploadedUrls.length > 0) {
-            finalData.append("image_urls", uploadedUrls.join(','));
-        }
+        if (uploadedUrls.length > 0) finalData.append("image_urls", uploadedUrls.join(','));
+
         const response = await fetch("https://api.lenguyenkiencuong.id.vn/api/guestbook", { 
-            method: "POST", 
-            body: finalData 
+            method: "POST", body: finalData 
         });
-        
         const result = await response.json();
 
         if (result.status === "success") {
@@ -124,14 +131,9 @@ form.addEventListener('submit', async function(e) {
                 title: 'Cảm ơn bạn!',
                 text: 'Lời chúc đã được gửi đi và đang chờ Cường & Thảo xem qua nhé ❤️',
                 icon: 'success',
-                confirmButtonColor: '#d4af37', 
-                confirmButtonText: 'Tuyệt vời',
-                customClass: {
-                    title: 'font-serif text-2xl',
-                    popup: 'rounded-2xl'
-                }
+                confirmButtonColor: '#d4af37',
+                confirmButtonText: 'Tuyệt vời'
             });
-            
             form.reset();
             const labelSpan = document.getElementById('gb-image').parentElement.querySelector('span');
             labelSpan.innerText = 'Đính kèm ảnh';
@@ -140,10 +142,9 @@ form.addEventListener('submit', async function(e) {
             throw new Error("Lỗi từ máy chủ");
         }
     } catch (error) {
-        console.error("Lỗi:", error);
         Swal.fire({
             title: 'Ôi hỏng!',
-            text: 'Mạng có vẻ yếu hoặc máy chủ đang bận. Bạn thử lại nha!',
+            text: 'Mạng có vẻ yếu. Bạn thử lại nha!',
             icon: 'error',
             confirmButtonColor: '#2c2c2c',
             confirmButtonText: 'Đóng'
