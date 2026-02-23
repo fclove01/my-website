@@ -86,7 +86,6 @@ form.addEventListener('submit', async function(e) {
         const imageFiles = document.getElementById('gb-image').files;
         let uploadedUrls = [];
 
-        // BƯỚC 1: Nén ảnh và Upload Song Song (Promise.all)
         if (imageFiles.length > 0) {
             const uploadPromises = Array.from(imageFiles).map(async (file) => {
                 try {
