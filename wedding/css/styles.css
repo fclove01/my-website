@@ -1,0 +1,72 @@
+body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
+.hero-bg {
+    /* Anh thay link ảnh cưới của anh chị vào đây nhé */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover; background-position: center;
+}
+.masonry { column-count: 2; column-gap: 1rem; }
+@media (min-width: 768px) { .masonry { column-count: 3; } }
+.masonry img { width: 100%; border-radius: 0.5rem; margin-bottom: 1rem; object-fit: cover; }
+
+.font-lavishly { 
+    font-family: 'Lavishly Yours', cursive; 
+    font-weight: 400;
+}
+
+.btn-wedding {
+    background-color: #d4af37; /* Màu vàng đồng accent */
+    color: #ffffff !important;
+    padding: 12px 36px;
+    border-radius: 50px; /* Bo góc tròn hoàn toàn */
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); /* Đổ bóng mờ rực rỡ */
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-wedding:hover {
+    background-color: #c5a028; /* Đậm hơn một chút khi hover */
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+    transform: translateY(-3px); /* Hiệu ứng nhấc lên nhẹ nhàng */
+}
+
+
+.font-handwriting { font-family: 'Caveat', cursive; }
+
+.paper-style {
+    background-color: #fcfbf8; /* Màu giấy hơi ngà */
+    background-image: repeating-linear-gradient(transparent, transparent 31px, #e5e7eb 31px, #e5e7eb 32px);
+    box-shadow: 3px 5px 15px rgba(0,0,0,0.05);
+    border: 1px solid #f0ece1;
+    position: relative;
+}
+
+.washi-tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 100px;
+    height: 30px;
+    background-color: rgba(220, 210, 180, 0.6); /* Băng keo mờ */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+/* Khung ảnh kỷ niệm kiểu Polaroid */
+.polaroid {
+    background: white;
+    padding: 10px 10px 35px 10px; /* Chừa khoảng trắng bên dưới */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transform: rotate(-2deg); /* Nghiêng nhẹ tự nhiên */
+    transition: transform 0.3s ease;
+}
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.02);
+}

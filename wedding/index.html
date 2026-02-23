@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đám Cưới Cường & Thảo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { wedding: { light: '#fdfbf7', dark: '#2c2c2c', accent: '#d4af37' } },
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
+
+</head>
+<body class="font-sans antialiased">
+
+    <header class="hero-bg h-screen flex flex-col items-center justify-center text-white text-center px-4">
+        <h3 class="tracking-widest uppercase text-sm mb-4 font-light">Save The Date</h3>
+        <h1 class="font-serif text-6xl md:text-8xl mb-6">Cường & Thảo</h1>
+        <p class="text-xl md:text-2xl font-light mb-12">19 . 04 . 2026</p>
+        
+        <div class="flex space-x-4 md:space-x-8 text-center" id="countdown">
+            <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg min-w-[80px]">
+                <span id="days" class="block text-3xl font-serif">00</span>
+                <span class="text-xs uppercase tracking-wider">Ngày</span>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg min-w-[80px]">
+                <span id="hours" class="block text-3xl font-serif">00</span>
+                <span class="text-xs uppercase tracking-wider">Giờ</span>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg min-w-[80px]">
+                <span id="minutes" class="block text-3xl font-serif">00</span>
+                <span class="text-xs uppercase tracking-wider">Phút</span>
+            </div>
+            <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg min-w-[80px]">
+                <span id="seconds" class="block text-3xl font-serif">00</span>
+                <span class="text-xs uppercase tracking-wider">Giây</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl mb-4">Sự Kiện</h2>
+            <div class="w-16 h-[1px] bg-wedding-dark mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="text-center p-8 bg-white shadow-sm border border-gray-100 rounded-xl">
+                <h3 class="font-serif text-2xl mb-4">Thánh Lễ Hôn Phối</h3>
+                <p class="font-light text-gray-600 mb-2">Thứ Sáu, <span class="font-bold mb-4">15</span> tháng <span class="font-bold mb-4">04</span>, 2026</p>
+                <p class="font-bold mb-4">09:00 Sáng</p>
+                <p class="text-gray-600">Nhà Thờ Giáo xứ Thanh Điền</p>
+                <p class="text-gray-600 mb-6">Phan Rang, Ninh Thuận</p>
+                <a href="#" class="btn-wedding">Xem Bản Đồ</a>
+            </div>
+            <div class="text-center p-8 bg-white shadow-sm border border-gray-100 rounded-xl">
+                <h3 class="font-serif text-2xl mb-4">Tiệc Cưới</h3>
+                <p class="font-light text-gray-600 mb-2">Thứ Sáu, <span class="font-bold mb-4">19</span> tháng <span class="font-bold mb-4">04</span>, 2026</p>
+                <p class="font-bold mb-4">17:00 Chiều</p>
+                <p class="text-gray-600">Sảnh Cưới Hoàng Thiên Kim</p>
+                <p class="text-gray-600 mb-6">09A Thống Nhất - Phan Rang - Ninh Thuận</p>
+                <a href="#" class="btn-wedding">Xem Bản Đồ</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white px-6 overflow-hidden">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-4xl mb-4">Album Kỷ Niệm</h2>
+                <div class="w-16 h-[1px] bg-wedding-dark mx-auto"></div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="font-serif text-2xl mb-4 text-wedding-accent"># Yêu nhau</h3>
+                <div class="relative w-full overflow-hidden">
+                    <div id="slider-anhcuoi" class="flex gap-4 transition-transform duration-700 ease-in-out">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="font-serif text-2xl mb-4 text-wedding-accent"># Và Cưới Nhau</h3>
+                <div class="relative w-full overflow-hidden">
+                    <div id="slider-lehoi" class="flex gap-4 transition-transform duration-700 ease-in-out">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=500" class="w-80 h-96 object-cover rounded-xl flex-shrink-0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="photo.html" class="btn-wedding">
+                    Xem Thêm Toàn Bộ Album
+                </a>
+            </div>
+
+        </div>
+    </section>
+    
+    <section class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-4xl mb-4">Sổ Lưu Bút</h2>
+            <p class="text-gray-500 font-light">Gửi lời chúc và chia sẻ những khoảnh khắc đẹp cùng chúng mình nhé!</p>
+        </div>
+
+        <div class="paper-style p-8 md:p-12 mb-16 relative mx-auto max-w-2xl transform -rotate-1 transition-transform hover:rotate-0 duration-500">
+            <div class="washi-tape"></div>
+            
+            <form id="guestbook-form" class="space-y-4">
+                <div>
+                    <input type="text" id="gb-name" placeholder="Tên người thương mến..." required 
+       class="w-full bg-transparent border-b border-gray-300 focus:border-wedding-dark focus:outline-none py-2 font-lavishly text-5xl text-gray-800 placeholder-gray-400">
+                </div>
+                
+                <div class="pt-2">
+                    <textarea id="gb-message" rows="3" placeholder="Để lại vài dòng yêu thương cho Cường & Thảo nhé..." required 
+          class="w-full bg-transparent border-none focus:outline-none resize-none font-lavishly text-4xl text-gray-800 placeholder-gray-400 leading-[38px] pt-2"></textarea>
+                </div>
+                
+                <div class="flex items-center justify-between border-t border-gray-200 pt-6 mt-4 font-sans">
+                    <label class="cursor-pointer flex items-center space-x-2 text-sm text-gray-500 hover:text-wedding-dark transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span>Đính kèm ảnh</span>
+                        <input type="file" id="gb-image" accept="image/*" class="hidden">
+                    </label>
+                    
+                    <button type="submit" class="btn-wedding px-8 py-2 text-xs">
+                        Gửi Yêu Thương
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="guestbook-entries" class="grid md:grid-cols-2 gap-8 mt-12"></div>
+        <div id="view-all-guestbook" class="text-center mt-16 hidden">
+            <a href="guestbook.html" class="btn-wedding">
+                Mở Toàn Bộ Sổ Lưu Bút
+            </a>
+        </div>
+    </section>
+    <footer class="bg-wedding-dark text-white text-center py-8">
+        <p class="font-serif text-xl mb-2">Cường & Thảo</p>
+        <p class="text-sm text-gray-400">© 2026. Code with ❤️</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
