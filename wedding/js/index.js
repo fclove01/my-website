@@ -52,10 +52,10 @@ async function loadEntries() {
 
             entryDiv.innerHTML = `
                 <div class="washi-tape"></div>
-                <p class="font-lavishly text-4xl text-gray-700 whitespace-pre-line leading-[38px] min-h-[64px]">
+                <p class="font-lavishly text-3xl text-gray-700 whitespace-pre-line leading-[38px] min-h-[64px]">
                     "${entry.message}"
                 </p>
-                <h4 class="font-lavishly text-5xl font-bold text-wedding-dark mt-4 text-right">
+                <h4 class="font-lavishly text-4xl font-bold text-wedding-dark mt-4 text-right">
                     - ${entry.name} -
                 </h4>
                 ${imgHTML}
