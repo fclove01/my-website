@@ -227,12 +227,12 @@ async function loadDynamicSliders() {
             `).join('');
 
             // QUAN TRỌNG: Chỉ khởi tạo Swiper và Lightbox SAU KHI HTML đã được nhét vào xong
-            new Swiper(".swiper-anhcuoi", {
+            new Swiper(".loveSwiper", {
                 slidesPerView: "auto", spaceBetween: 20, freeMode: true, loop: true,
                 autoplay: { delay: 2500, disableOnInteraction: false }
             });
 
-            new Swiper(".swiper-lehoi", {
+            new Swiper(".weddingSwiper", {
                 slidesPerView: "auto", spaceBetween: 20, freeMode: true, loop: true,
                 autoplay: { delay: 3500, disableOnInteraction: false, reverseDirection: true }
             });
