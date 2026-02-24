@@ -169,28 +169,81 @@ imageInput.addEventListener('change', function(e) {
     }
 });
 
-var loveSwiper = new Swiper(".loveSwiper", {
-    slidesPerView: "auto",
-    spaceBetween: 20,
-    freeMode: true,
-    autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-    },
-});
-var weddingSwiper = new Swiper(".weddingSwiper", {
-    slidesPerView: "auto",
-    spaceBetween: 20,
-    freeMode: true,
-    autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-    },
-});
+// var loveSwiper = new Swiper(".loveSwiper", {
+//     slidesPerView: "auto",
+//     spaceBetween: 20,
+//     freeMode: true,
+//     autoplay: {
+//         delay: 2500,
+//         disableOnInteraction: false,
+//     },
+// });
+// var weddingSwiper = new Swiper(".weddingSwiper", {
+//     slidesPerView: "auto",
+//     spaceBetween: 20,
+//     freeMode: true,
+//     autoplay: {
+//         delay: 3500,
+//         disableOnInteraction: false,
+//     },
+// });
 
-const lightbox = GLightbox({
-    touchNavigation: true,
-    loop: true,
-    openEffect: 'zoom',
-    closeEffect: 'fade'
-});
+// const lightbox = GLightbox({
+//     touchNavigation: true,
+//     loop: true,
+//     openEffect: 'zoom',
+//     closeEffect: 'fade'
+// });
+
+// HÀM TẢI ẢNH TỪ R2 VÀ TRỘN RANDOM VÀO SLIDER
+async function loadDynamicSliders() {
+    try {
+        const res = await fetch("https://api.lenguyenkiencuong.id.vn/api/photos");
+        const data = await res.json();
+
+        if (data.status === "success") {
+            // Lấy ảnh ra và xáo trộn ngẫu nhiên (Lấy tối đa 10 tấm mỗi bên cho nhẹ web)
+            const randomWedding = data.images.wedding.sort(() => 0.5 - Math.random()).slice(0, 10);
+            const randomLove = data.images.love.sort(() => 0.5 - Math.random()).slice(0, 10);
+
+            // Đổ HTML vào khung Ảnh Cưới
+            const weddingWrapper = document.getElementById('slider-wedding-wrapper');
+            weddingWrapper.innerHTML = randomWedding.map(url => `
+                <div class="swiper-slide w-80">
+                    <a href="${url}" class="glightbox" data-gallery="anh-cuoi">
+                        <img src="${url}" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                    </a>
+                </div>
+            `).join('');
+
+            // Đổ HTML vào khung Lúc Yêu Nhau
+            const loveWrapper = document.getElementById('slider-love-wrapper');
+            loveWrapper.innerHTML = randomLove.map(url => `
+                <div class="swiper-slide w-80">
+                    <a href="${url}" class="glightbox" data-gallery="luc-yeu-nhau">
+                        <img src="${url}" class="w-80 h-96 object-cover rounded-xl cursor-pointer">
+                    </a>
+                </div>
+            `).join('');
+
+            // QUAN TRỌNG: Chỉ khởi tạo Swiper và Lightbox SAU KHI HTML đã được nhét vào xong
+            new Swiper(".swiper-anhcuoi", {
+                slidesPerView: "auto", spaceBetween: 20, freeMode: true, loop: true,
+                autoplay: { delay: 2500, disableOnInteraction: false }
+            });
+
+            new Swiper(".swiper-lehoi", {
+                slidesPerView: "auto", spaceBetween: 20, freeMode: true, loop: true,
+                autoplay: { delay: 3500, disableOnInteraction: false, reverseDirection: true }
+            });
+
+            GLightbox({ touchNavigation: true, loop: true, openEffect: 'zoom', closeEffect: 'fade' });
+        }
+    } catch (e) {
+        console.error("Lỗi tải ảnh slider:", e);
+    }
+}
+
+// Chạy hàm khi mở trang
+loadDynamicSliders();
+

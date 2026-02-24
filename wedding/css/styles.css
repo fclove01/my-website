@@ -8,13 +8,10 @@ body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
 @media (min-width: 768px) { .masonry { column-count: 3; } }
 .masonry img { width: 100%; border-radius: 0.5rem; margin-bottom: 1rem; object-fit: cover; }
 
-/* .font-lavishly { 
-    font-family: 'Lavishly Yours', cursive; 
-    font-weight: 400;
-    font-family: "Gwendolyn", cursive;
-    font-weight: 400;
-    font-style: normal;
-} */
+.font-lavishly { 
+    font-family: "Playwrite US Trad", cursive;
+    font-optical-sizing: auto;
+}
 
 .btn-wedding {
     background-color: #d4af37; /* Màu vàng đồng accent */
