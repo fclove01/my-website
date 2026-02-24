@@ -155,7 +155,9 @@
             color: #aaa;
             font-style: italic;
         }
-
+        .masonry-item {
+            margin-bottom: 20px;
+        }
         /* Responsive */
         @media(max-width: 992px){
             .gallery {
@@ -199,10 +201,10 @@
     </div>
 
     <script>
-        function switchTab(tab) {
-            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-            document.getElementById("btn-" + tab).classList.add("active");
-        }
+        // function switchTab(tab) {
+        //     document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+        //     document.getElementById("btn-" + tab).classList.add("active");
+        // }
 
         const lightbox = GLightbox({
             selector: '.gallery a'

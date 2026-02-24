@@ -9,7 +9,7 @@ async function fetchAllPhotos() {
         const data = await response.json();
         if (data.status === "success") {
             allImages = data.images;
-            switchTab('wedding'); // Mặc định mở tab Ảnh Cưới đầu tiên
+            switchTab('love');
         }
     } catch (error) {
         document.getElementById('photo-gallery').innerHTML = "<p class='text-center text-red-500 w-full'>Lỗi kết nối. Vui lòng tải lại trang.</p>";
@@ -18,7 +18,8 @@ async function fetchAllPhotos() {
 
 // Hàm chuyển đổi Tab
 function switchTab(category) {
-    // Đổi màu nút bấm (Active / Inactive)
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+    document.getElementById("btn-" + tab).classList.add("active");
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.className = "tab-btn px-2 py-2 font-serif text-lg md:text-xl text-gray-400 hover:text-gray-800 transition border-b-2 border-transparent";
     });
