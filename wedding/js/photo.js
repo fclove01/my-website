@@ -19,7 +19,7 @@ async function fetchAllPhotos() {
 
         if (data.status === "success" && data.images) {
             allImages = data.images;
-            switchTab('wedding'); // tab mặc định
+            switchTab('love');
         } else {
             gallery.innerHTML = `<div class="loader">Không có dữ liệu ảnh.</div>`;
         }
