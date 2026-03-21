@@ -9,7 +9,7 @@ body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
 .masonry img { width: 100%; border-radius: 0.5rem; margin-bottom: 1rem; object-fit: cover; }
 
 .font-lavishly { 
-    font-family: "Playwrite US Trad", cursive;
+    /* font-family: "Playwrite US Trad", cursive; */
     font-optical-sizing: auto;
 }
 
