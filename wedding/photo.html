@@ -148,17 +148,13 @@
             transform: scale(1.05);
         }
 
-        /* Loader */
         .loader {
             text-align: center;
             padding: 60px;
             color: #aaa;
             font-style: italic;
         }
-        /* .masonry-item {
-            margin-bottom: 20px;
-        } */
-        /* Responsive */
+
         @media(max-width: 992px){
             .gallery {
                 column-count: 2;
@@ -201,11 +197,6 @@
     </div>
 
     <script>
-        // function switchTab(tab) {
-        //     document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-        //     document.getElementById("btn-" + tab).classList.add("active");
-        // }
-
         const lightbox = GLightbox({
             selector: '.gallery a'
         });

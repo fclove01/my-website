@@ -1,4 +1,9 @@
 body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 10px; }
+
 .hero-bg {
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://pub-73048d04ba6347468302e8ca0fc32877.r2.dev/wedding/DSC_8122_compressed.jpg');
     background-size: cover; background-position: center;
@@ -29,8 +34,6 @@ body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
     transform: translateY(-3px); /* Hiệu ứng nhấc lên nhẹ nhàng */
 }
-
-
 .font-handwriting { font-family: 'Caveat', cursive; }
 
 .paper-style {
@@ -53,7 +56,6 @@ body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
     z-index: 10;
 }
 
-/* Khung ảnh kỷ niệm kiểu Polaroid */
 .polaroid {
     background: white;
     padding: 10px 10px 35px 10px; /* Chừa khoảng trắng bên dưới */
@@ -67,10 +69,8 @@ body { background-color: #fdfbf7; color: #2c2c2c; scroll-behavior: smooth; }
 
 @media (max-width: 639px) {
   .flex.items-center.gap-6 span {
-    display: none; /* Ẩn toàn bộ chữ trong các nút gửi ảnh/video */
+    display: none; 
   }
-  
-  /* Căn chỉnh lại khoảng cách icon cho đẹp trên mobile */
   .flex.items-center.gap-6 {
     gap: 1.5rem; 
   }
